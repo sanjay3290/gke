@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "{{ .Values.staticIp }}"
+    networking.gke.io/managed-certificates: "{{ .Release.Name }}-cert"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /svc1
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.svc1.serviceName }}
+            port:
+              number: {{ .Values.svc1.port }}
+      - path: /svc2
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.svc2.serviceName }}
+            port:
+              number: {{ .Values.svc2.port }}

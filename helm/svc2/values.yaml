@@ -1,0 +1,9 @@
+replicaCount: 2
+image:
+  repository: hashicorp/http-echo
+  tag: "0.2.3"
+service:
+  port: 80
+  targetPort: 5678
+  type: ClusterIP
+text: "Hello from svc2"

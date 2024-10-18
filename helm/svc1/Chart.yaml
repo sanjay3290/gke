@@ -1,0 +1,4 @@
+apiVersion: v2
+name: svc1
+description: A Helm chart for svc1 service
+version: 0.1.0

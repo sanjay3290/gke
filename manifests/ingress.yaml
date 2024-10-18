@@ -1,0 +1,35 @@
+---
+# cert.yaml
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: ingress-test-cert
+spec:
+  domains:
+    - gketest.sanjayramadugu.com
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: svc-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "gke-ingress-static-ip"
+    networking.gke.io/managed-certificates: "ingress-test-cert"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /svc1
+        pathType: Prefix
+        backend:
+          service:
+            name: svc1
+            port:
+              number: 80
+      - path: /svc2
+        pathType: Prefix
+        backend:
+          service:
+            name: svc2
+            port:
+              number: 80

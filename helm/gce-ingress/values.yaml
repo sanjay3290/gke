@@ -1,0 +1,8 @@
+domain: "gketest.sanjayramadugu.com"
+staticIp: "gke-ingress-static-ip"
+svc1:
+  serviceName: svc1
+  port: 80
+svc2:
+  serviceName: svc2
+  port: 80

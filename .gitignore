@@ -75,7 +75,6 @@ helm/charts/*/templates/*
 *.js
 *.json
 *.xml
-*.yaml
 *.yml
 *.ini
 *.conf

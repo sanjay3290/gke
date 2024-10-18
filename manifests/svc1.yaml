@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: svc1-deployment
+  labels:
+    app: svc1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: svc1
+  template:
+    metadata:
+      labels:
+        app: svc1
+    spec:
+      containers:
+      - name: svc1
+        image: hashicorp/http-echo:0.2.3
+        args:
+        - "-text=Hello from svc1"
+        ports:
+        - containerPort: 5678
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc1
+spec:
+  ports:
+  - port: 80
+    targetPort: 5678
+  selector:
+    app: svc1
+  type: ClusterIP
